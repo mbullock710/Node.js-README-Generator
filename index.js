@@ -17,11 +17,6 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'tableofcontents',
-        message: 'Please enter the table of contents for this project'
-    },
-    {
-        type: 'input',
         name: 'installation',
         message: 'Please provide the steps required to install your project.'
     },
@@ -31,9 +26,10 @@ const questions = [
         message: 'Please provide the instructions for your project. Please also provide examples of use.'
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'license',
-        message: 'Please enter the license you are using.'
+        message: 'Please enter the license you are using.',
+        choices: ['MIT', 'Apache','none']
     },
     {
         type: 'input',
@@ -61,46 +57,19 @@ function writeToFile(fileName, content) {
 };
 
 // TODO: Create a function to initialize app
-function init() {
-    inquirer.prompt(questions).then((responses) => {
-        const content =
-    `# ${responses.title}
-    
-    ## Description
+// function init() {
+//     inquirer.prompt(questions).then((responses) => {
+//         const content = generateMarkdown(responses)
+   
+//     writeToFile('README.md', content)
+//     })
+// }
 
-    ${responses.description}
-
-    ## Table of Contents
-
-    ${responses.tableofcontents}
-
-    ## Installation
-
-    ${responses.installation}
-
-    ## Usage
-
-    ${responses.usage}
-
-    ## License
-    
-    ${responses.license}
-
-    ## Contributing
-    
-    ${responses.contributing}
-
-    ## Tests
-    
-    ${responses.tests}
-
-    ## Questions
-    
-    ${responses.questions}
-    `
-
-    writeToFile('README.md', content)
-    })
+async function init() {
+    const res = await inquirer.prompt(questions)
+        const content = generateMarkdown(res)
+   
+    writeToFile('test.md', content)
 }
 
 // Function call to initialize app
