@@ -29,7 +29,7 @@ const questions = [
         type: 'list',
         name: 'license',
         message: 'Please enter the license you are using.',
-        choices: ['MIT', 'Apache','none']
+        choices: ['Apache','Eclipse','MIT','none']
     },
     {
         type: 'input',
@@ -46,6 +46,11 @@ const questions = [
         name: 'questions',
         message: 'Enter your GitHub username.'
     },
+    {
+        type: 'input',
+        name: 'questions2',
+        message: 'Enter your email address.'
+    },
 
 ]
 // TODO: Create a function to write README file
@@ -56,20 +61,11 @@ function writeToFile(fileName, content) {
     )
 };
 
-// TODO: Create a function to initialize app
-// function init() {
-//     inquirer.prompt(questions).then((responses) => {
-//         const content = generateMarkdown(responses)
-   
-//     writeToFile('README.md', content)
-//     })
-// }
-
 async function init() {
     const res = await inquirer.prompt(questions)
         const content = generateMarkdown(res)
    
-    writeToFile('test.md', content)
+    writeToFile('README.md', content)
 }
 
 // Function call to initialize app
